@@ -241,15 +241,21 @@ class BaseGPIOExpander(metaclass=MetaGPIOExpander):
         setattr(self, f"O{_name}{_idx}", _value)
 
 
-class PCA9555(BaseGPIOExpander):
-    _NUM_GPIO = 16
+# PCA series
+class PCA9534(BaseGPIOExpander):
+    _NUM_GPIO = 8
 
 
 class PCA9535(BaseGPIOExpander):
     _NUM_GPIO = 16
 
 
-class PCA9534(BaseGPIOExpander):
+class PCA9555(BaseGPIOExpander):
+    _NUM_GPIO = 16
+
+
+# TCA series
+class TCA9534(BaseGPIOExpander):
     _NUM_GPIO = 8
 
 
@@ -257,5 +263,5 @@ class TCA9535(BaseGPIOExpander):
     _NUM_GPIO = 16
 
 
-class TCA9534(BaseGPIOExpander):
-    _NUM_GPIO = 8
+class TCA9555(BaseGPIOExpander):
+    _NUM_GPIO = 16
