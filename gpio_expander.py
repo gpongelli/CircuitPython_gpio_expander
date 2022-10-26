@@ -76,56 +76,50 @@ def _get_registry_params(value, x):
 
 
 class _MetaGPIOExpander(type):
-    def __new__(mcs, clsname, bases, dct, *args, **kwargs):
-        result_dct = {}
+    def __new__(mcs, clsname, bases, dct, *args, **kwargs):  # pylint: disable=unused-argument
+        _result_dct = {}
 
         for key, value in dct.items():
             # variable has full qualified name
-            result_dct[key] = value
+            _result_dct[key] = value
 
             if key == '_NUM_GPIO':
                 # call to get only interesting data
-                _, _width, _adder, _ = _get_registry_params(value, 1)
+                _, _width, _, _ = _get_registry_params(value, 1)
                 # entire registries
-                result_dct['input_ports'] = ROBits(8 * _width, _INPUT_PORT, 0, register_width=_width)
-                result_dct['output_ports'] = RWBits(8 * _width, _OUTPUT_PORT, 0, register_width=_width)
-                result_dct['polarity_inversions'] = RWBits(8 * _width, _POLARITY_REGISTER, 0, register_width=_width)
-                result_dct['configuration_ports'] = RWBits(8 * _width, _CONFIG_REGISTER, 0, register_width=_width)
+                _result_dct['input_ports'] = ROBits(8 * _width, _INPUT_PORT, 0, register_width=_width)
+                _result_dct['output_ports'] = RWBits(8 * _width, _OUTPUT_PORT, 0, register_width=_width)
+                _result_dct['polarity_inversions'] = RWBits(8 * _width, _POLARITY_REGISTER, 0, register_width=_width)
+                _result_dct['configuration_ports'] = RWBits(8 * _width, _CONFIG_REGISTER, 0, register_width=_width)
 
                 # create single bit registries
                 for x in range(value):
                     _name, _reg_address_multiplier, _adder, _idx = _get_registry_params(value, x)
 
-                    _cfg_reg = RWBit(_CONFIG_REGISTER * _reg_address_multiplier + _adder, _idx)
-                    _input_reg = ROBit(_INPUT_PORT * _reg_address_multiplier + _adder, _idx)
-                    _output_reg = RWBit(_OUTPUT_PORT * _reg_address_multiplier + _adder, _idx)
-                    _polarity_reg = RWBit(_POLARITY_REGISTER * _reg_address_multiplier + _adder, _idx)
-
                     # REGISTRY 0 and 1  INPUT PORT
-                    prop_name = f"I{_name}{_idx}"
-                    result_dct[prop_name] = _input_reg
+                    _result_dct[f"I{_name}{_idx}"] = ROBit(_INPUT_PORT * _reg_address_multiplier + _adder, _idx)
 
                     # REGISTRY 2 and 3  OUTPUT PORT
-                    prop_name = f"O{_name}{_idx}"
-                    result_dct[prop_name] = _output_reg
+                    _result_dct[f"O{_name}{_idx}"] = RWBit(_OUTPUT_PORT * _reg_address_multiplier + _adder, _idx)
 
                     # REGISTRY 4 and 5  POLARITY INVERSION REGISTER
-                    prop_name = f"N{_name}{_idx}"
-                    result_dct[prop_name] = _polarity_reg
+                    _result_dct[f"N{_name}{_idx}"] = RWBit(_POLARITY_REGISTER * _reg_address_multiplier + _adder, _idx)
 
                     # REGISTRY 6 and 7  CONFIGURATION REGISTER
-                    prop_name = f"C{_name}{_idx}"
-                    result_dct[prop_name] = _cfg_reg
+                    _result_dct[f"C{_name}{_idx}"] = RWBit(_CONFIG_REGISTER * _reg_address_multiplier + _adder, _idx)
 
-        inst = super(_MetaGPIOExpander, mcs).__new__(mcs, clsname, bases, result_dct)
-        return inst
+        return super(_MetaGPIOExpander, mcs).__new__(mcs, clsname, bases, _result_dct)
 
 
 class _BaseGPIOExpander(metaclass=_MetaGPIOExpander):
-    def __init__(self, i2c_bus: I2C, address: int, **kwargs) -> None:
+    def __init__(self, i2c_bus: I2C, address: int, **kwargs) -> None:  # pylint: disable=unused-argument
         self.i2c_device = i2cdevice.I2CDevice(i2c_bus, address)
 
-    def max_gpios(self):
+    def max_gpios(self) -> int:
+        """Return subclass' gpio number.
+
+        :return int value from subclass's attribute.
+        """
         return getattr(self, '_NUM_GPIO')
 
 
