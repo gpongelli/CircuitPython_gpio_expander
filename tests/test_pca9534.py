@@ -13,4 +13,4 @@ def test_pca9534_object(mock_i2c, registry_list_8_gpio):
 
 def test_pca9534_num_gpios(mock_i2c):
     _dev = gpio_expander.PCA9534(I2C(2, 3), 4)  # fake addresses
-    assert 8 == _dev.max_gpios()
+    assert _dev.max_gpios() == 8
