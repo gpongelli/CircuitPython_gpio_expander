@@ -1,4 +1,3 @@
-import pytest
 from busio import I2C
 
 import gpio_expander
