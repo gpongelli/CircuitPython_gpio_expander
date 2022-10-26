@@ -76,7 +76,7 @@ def _get_registry_params(value, x):
 
 
 class _MetaGPIOExpander(type):
-    def __new__(mcs, clsname, bases, dct, *args, **kwargs):  # pylint: disable=unused-argument
+    def __new__(mcs, clsname, bases, dct, *args, **kwargs):  # pylint: disable=unused-argument,too-many-locals
         _result_dct = {}
 
         for key, value in dct.items():
