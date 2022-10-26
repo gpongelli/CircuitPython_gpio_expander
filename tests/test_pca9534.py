@@ -1,6 +1,7 @@
-import gpio_expander
 import pytest
 from busio import I2C
+
+import gpio_expander
 
 
 def test_pca9534_object(mock_i2c, registry_list_8_gpio):

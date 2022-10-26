@@ -59,8 +59,7 @@ setup(
     ],
     # What does your project relate to?
     keywords="adafruit blinka circuitpython micropython gpio_expander gpio expander PCA9534 PCA9535 PCA9555 TCA9534 "
-             "TCA9535 TCA9555",
-
+    "TCA9535 TCA9555",
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
     # TODO: IF LIBRARY FILES ARE A PACKAGE FOLDER,
