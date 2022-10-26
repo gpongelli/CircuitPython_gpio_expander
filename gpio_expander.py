@@ -2,8 +2,11 @@
 # SPDX-FileCopyrightText: Copyright (c) 2022 Gabriele Pongelli
 #
 # SPDX-License-Identifier: MIT
+
 """
-`gpio_expander`
+
+`gpio_expander`.
+
 ================================================================================
 
 CircuitPython helper library for gpio expanders (Texas Instrument PCA95xx and TCA95xx chips).
@@ -35,7 +38,6 @@ Implementation Notes
 
 # imports
 try:
-    import typing  # pylint: disable=unused-import
     from busio import I2C
 except ImportError:
     pass
@@ -43,17 +45,10 @@ except ImportError:
 __version__ = "0.0.0"
 __repo__ = "https://github.com/gpongelli/CircuitPython_gpio_expander.git"
 
-from micropython import const
 import adafruit_bus_device.i2c_device as i2cdevice
-
 from adafruit_register.i2c_bit import ROBit, RWBit
 from adafruit_register.i2c_bits import ROBits, RWBits
-
-try:
-    from typing import Optional, Type, NoReturn
-    from circuitpython_typing.device_drivers import I2CDeviceDriver
-except ImportError:
-    pass
+from micropython import const
 
 # For the PCA 953X and 955X series, the chips with 8 GPIO's have these port numbers
 # The chips with 16 GPIO's have the first port for each type at double these numbers
@@ -80,7 +75,7 @@ def _get_registry_params(value, x):
     return _name, _reg_address_multiplier, _adder, _idx
 
 
-class MetaGPIOExpander(type):
+class _MetaGPIOExpander(type):
     def __new__(mcs, clsname, bases, dct, *args, **kwargs):
         result_dct = {}
 
@@ -122,11 +117,11 @@ class MetaGPIOExpander(type):
                     prop_name = f"C{_name}{_idx}"
                     result_dct[prop_name] = _cfg_reg
 
-        inst = super(MetaGPIOExpander, mcs).__new__(mcs, clsname, bases, result_dct)
+        inst = super(_MetaGPIOExpander, mcs).__new__(mcs, clsname, bases, result_dct)
         return inst
 
 
-class BaseGPIOExpander(metaclass=MetaGPIOExpander):
+class _BaseGPIOExpander(metaclass=_MetaGPIOExpander):
     def __init__(self, i2c_bus: I2C, address: int, **kwargs) -> None:
         self.i2c_device = i2cdevice.I2CDevice(i2c_bus, address)
 
@@ -135,26 +130,38 @@ class BaseGPIOExpander(metaclass=MetaGPIOExpander):
 
 
 # PCA series
-class PCA9534(BaseGPIOExpander):
+class PCA9534(_BaseGPIOExpander):
+    """PCA9534 8-Bit I2C I/O Expander."""
+
     _NUM_GPIO = 8
 
 
-class PCA9535(BaseGPIOExpander):
+class PCA9535(_BaseGPIOExpander):
+    """PCA9535 16-Bit I2C I/O Expander."""
+
     _NUM_GPIO = 16
 
 
-class PCA9555(BaseGPIOExpander):
+class PCA9555(_BaseGPIOExpander):
+    """PCA9555 16-Bit I2C I/O Expander."""
+
     _NUM_GPIO = 16
 
 
 # TCA series
-class TCA9534(BaseGPIOExpander):
+class TCA9534(_BaseGPIOExpander):
+    """TCA9534 Low-Voltage 8-Bit I2C I/O Expander."""
+
     _NUM_GPIO = 8
 
 
-class TCA9535(BaseGPIOExpander):
+class TCA9535(_BaseGPIOExpander):
+    """TCA9535 Low-Voltage 16-Bit I2C I/O Expander."""
+
     _NUM_GPIO = 16
 
 
-class TCA9555(BaseGPIOExpander):
+class TCA9555(_BaseGPIOExpander):
+    """TCA9555 Low-Voltage 16-Bit I2C I/O Expander."""
+
     _NUM_GPIO = 16
