@@ -221,7 +221,7 @@ class BaseGPIOExpander(metaclass=MetaGPIOExpander):
         self.i2c_device = i2cdevice.I2CDevice(i2c_bus, address)
 
     def max_gpios(self):
-        return getattr(self, '_GPIO_NUMBER')
+        return getattr(self, '_NUM_GPIO')
 
 # RPi.GPIO compatible interface
     def setmode(self, gpio: int) -> None:

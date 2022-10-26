@@ -16,3 +16,8 @@ def test_pca9555_object(mock_i2c, registry_list_16_gpio):
 #
 #     #assert _dev.O0_0 is True
 #     assert _dev.GPIO0.value is True
+
+
+def test_pca9555_num_gpios(mock_i2c):
+    _dev = gpio_expander.PCA9555(I2C(2, 3), 4)  # fake addresses
+    assert 16 == _dev.max_gpios()
