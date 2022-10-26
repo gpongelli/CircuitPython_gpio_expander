@@ -5,17 +5,23 @@
 [tool.poetry]
     name = "circuitpython_pca95xx"
     version = "0.0.0"
-    homepage = "https://github.com/gpongelli/CircuitPython_PCA95XX.git"
-    description = "Utility methods to edit CIRO generated Aladdin Package, generating and adding help pages."
+    homepage = "https://github.com/gpongelli/CircuitPython_gpio_expander.git"
+    description = "CircuitPython helper library for gpio expanders (Texas Instrument PCA95xx and TCA95xx chips)."
     authors = ["Gabriele Pongelli <gabriele.pongelli@gmail.com>"]
+    license = "MIT"
+    keywords = ["adafruit", "blinka", "circuitpython", "micropython", "gpio_expander", "gpio", "expander", "PCA9534",
+        "PCA9535", "PCA9555", "TCA9534", "TCA9535", "TCA9555"]
     readme = "README.rst"
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
         'Natural Language :: English',
+        "Topic :: Software Development :: Libraries",
+        "Topic :: System :: Hardware",
+        "License :: OSI Approved :: MIT License",
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.10'
     ]
 
 
@@ -86,7 +92,7 @@
     name = "cz_conventional_commits"
     version = "0.0.0"
     version_files = [
-        "pca95xx.py:__version__",
+        "gpio_expander.py:__version__",
         "pyproject.toml:version"
     ]
     gpg_sign = true

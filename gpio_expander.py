@@ -16,12 +16,12 @@ Implementation Notes
 
 **Hardware:**
 
-* `Texas Instrument PCA9555 <https://www.ti.com/lit/ds/symlink/pca9555.pdf>_`
-* `Texas Instrument PCA9535 <https://www.ti.com/lit/ds/symlink/pca9535.pdf>_`
 * `Texas Instrument PCA9534 <https://www.ti.com/lit/ds/symlink/pca9534.pdf>_`
-* `Texas Instrument TCA9535 <https://www.ti.com/lit/ds/symlink/tca9535.pdf>_`
+* `Texas Instrument PCA9535 <https://www.ti.com/lit/ds/symlink/pca9535.pdf>_`
+* `Texas Instrument PCA9555 <https://www.ti.com/lit/ds/symlink/pca9555.pdf>_`
 * `Texas Instrument TCA9534 <https://www.ti.com/lit/ds/symlink/tca9534.pdf>_`
-
+* `Texas Instrument TCA9535 <https://www.ti.com/lit/ds/symlink/tca9535.pdf>_`
+* `Texas Instrument TCA9555 <https://www.ti.com/lit/ds/symlink/tca9555.pdf>_`
 
 **Software and Dependencies:**
 
