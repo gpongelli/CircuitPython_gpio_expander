@@ -2,6 +2,6 @@
 
 ### Feat
 
-- add full lenght registries
+- add full length registries
 - initial library code and tests
 - pyproject.toml files for poetry
