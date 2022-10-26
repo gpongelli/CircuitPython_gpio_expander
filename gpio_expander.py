@@ -49,6 +49,7 @@ from micropython import const
 import adafruit_bus_device.i2c_device as i2cdevice
 
 from adafruit_register.i2c_bit import ROBit, RWBit
+from adafruit_register.i2c_bits import ROBits, RWBits
 
 try:
     from typing import Optional, Type, NoReturn
@@ -172,6 +173,15 @@ class MetaGPIOExpander(type):
             result_dct[key] = value
 
             if key == '_NUM_GPIO':
+                # call to get only interesting data
+                _, _width, _adder, _ = _get_registry_params(value, 1)
+                # entire registries
+                result_dct['input_ports'] = ROBits(8 * _width, _INPUT_PORT, 0, register_width=_width)
+                result_dct['output_ports'] = RWBits(8 * _width, _OUTPUT_PORT, 0, register_width=_width)
+                result_dct['polarity_inversions'] = RWBits(8 * _width, _POLARITY_REGISTER, 0, register_width=_width)
+                result_dct['configuration_ports'] = RWBits(8 * _width, _CONFIG_REGISTER, 0, register_width=_width)
+
+                # create single bit registries
                 for x in range(value):
                     _name, _reg_address_multiplier, _adder, _idx = _get_registry_params(value, x)
 
