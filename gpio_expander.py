@@ -66,88 +66,6 @@ _POLARITY_REGISTER = const(2)
 _CONFIG_REGISTER = const(3)
 
 
-class RWDependentBit(RWBit):
-    """A default descriptor """
-    dependent_bit: RWBit
-
-    def __init__(
-            self,
-            register_address: int,
-            bit: int,
-
-            flag: bool,
-            register_width: int = 1,
-            lsb_first: bool = True
-    ) -> None:
-        super(RWDependentBit, self).__init__(register_address, bit, register_width, lsb_first)
-        # self.__dependent_bit = dependent_bit
-        self.__flag = flag
-
-    def __set__(self, obj: I2CDeviceDriver, value: bool):
-        # Pin can be set only when configuration dependent bit is equal to 0.
-        if self.__flag != self.dependent_bit:  # self.__dependent_bit:
-            raise AttributeError("Pin not configured as output.")
-        else:
-            super(RWDependentBit, self).__set__(obj, value)
-
-
-class _I2cGpio:
-
-    def __init__(self, input_reg: ROBit, output_reg: RWDependentBit, polarity_reg: RWBit, cfg_reg: RWBit):
-        self.__input_reg = input_reg
-        self.__output_reg = output_reg
-        self.__polarity_reg = polarity_reg
-        self.__cfg_reg = cfg_reg
-
-    def _get_value(self) -> bool:
-        # If a bit in configuration register is set to 1, the corresponding port pin is enabled as an input.
-        # If a bit in this register is cleared to 0, the corresponding port pin is enabled as an output.
-        if self.__cfg_reg:
-            self.value = self.__input_reg
-        else:
-            self.value = self.__output_reg
-        return self.value
-
-# gpiozero InputDevice and OutputDevice compatible interfaces
-    @property
-    def value(self) -> bool:
-        # The Input Port registers reflect the incoming logic levels of the pins, regardless of whether the pin is
-        # defined as an input or an output by the Configuration register.
-        return self.__input_reg
-
-    @value.setter
-    def value(self, new_val: bool) -> None:
-        self.__output_reg = new_val
-
-    def is_active(self):
-        return self.value
-
-    @property
-    def active_high(self):
-        pass
-
-    @active_high.setter
-    def active_high(self, value):
-        pass
-
-    def on(self):
-        pass
-
-    def off(self):
-        pass
-
-    def toggle(self):
-        pass
-
-    @property
-    def configure(self) -> bool:
-        return self.__cfg_reg
-
-    @configure.setter
-    def configure(self, new_value: bool) -> None:
-        self.__cfg_reg = new_value
-
-
 def _get_registry_params(value, x):
     _name = ""
     _reg_address_multiplier = 1
@@ -188,13 +106,7 @@ class MetaGPIOExpander(type):
                     _cfg_reg = RWBit(_CONFIG_REGISTER * _reg_address_multiplier + _adder, _idx)
                     _input_reg = ROBit(_INPUT_PORT * _reg_address_multiplier + _adder, _idx)
                     _output_reg = RWBit(_OUTPUT_PORT * _reg_address_multiplier + _adder, _idx)
-                        # RWDependentBit(_OUTPUT_PORT * _reg_address_multiplier + _adder, _idx,
-                        #                         _cfg_reg, False)
                     _polarity_reg = RWBit(_POLARITY_REGISTER * _reg_address_multiplier + _adder, _idx)
-
-                    # GPIO object
-                    # prop_name = f"GPIO{x}"
-                    # result_dct[prop_name] = _I2cGpio(_input_reg, _output_reg, _polarity_reg, _cfg_reg)
 
                     # REGISTRY 0 and 1  INPUT PORT
                     prop_name = f"I{_name}{_idx}"
@@ -222,23 +134,6 @@ class BaseGPIOExpander(metaclass=MetaGPIOExpander):
 
     def max_gpios(self):
         return getattr(self, '_NUM_GPIO')
-
-# RPi.GPIO compatible interface
-    def setmode(self, gpio: int) -> None:
-        # Does nothing, pin already configured.
-        pass
-
-    def setup(self, gpio: int, mode: bool) -> None:
-        _name, _, _, _idx = _get_registry_params(self.max_gpios(), gpio)
-        setattr(self, f"C{_name}{_idx}", mode)
-
-    def input(self, gpio: int) -> bool:
-        _name, _, _, _idx = _get_registry_params(self.max_gpios(), gpio)
-        return getattr(self, f"I{_name}{_idx}")
-
-    def output(self, gpio: int, _value: bool) -> None:
-        _name, _, _, _idx = _get_registry_params(self.max_gpios(), gpio)
-        setattr(self, f"O{_name}{_idx}", _value)
 
 
 # PCA series

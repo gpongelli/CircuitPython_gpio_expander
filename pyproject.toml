@@ -24,7 +24,6 @@
         Adafruit-Blinka = "^8.5.0"
         adafruit-circuitpython-busdevice = "^5.2.3"
         adafruit-circuitpython-register = "^1.9.14"
-        gpiozero = "^1.6.2"
 
 
     [tool.poetry.group.devel]
