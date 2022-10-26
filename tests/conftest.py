@@ -33,9 +33,9 @@ def registry_list_16_gpio():
 
     _all_reg = []
     for r in _reg:
-        for rp in _reg_part:
+        for _part in _reg_part:
             for b in _sub_bit:
-                _all_reg.append(f"{r}{rp}_{b}")
+                _all_reg.append(f"{r}{_part}_{b}")
 
     _all_reg.append('input_ports')
     _all_reg.append('output_ports')
