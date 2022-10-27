@@ -33,7 +33,7 @@ setup(
         "local_scheme": "no-local-version",
     },
     setup_requires=["setuptools_scm"],
-    description="uno due tre",
+    description="CircuitPython helper library for gpio expanders (Texas Instrument PCA95xx and TCA95xx chips).",
     long_description=long_description,
     long_description_content_type="text/x-rst",
     # The project's main homepage.
@@ -50,7 +50,7 @@ setup(
     license="MIT",
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries",
         "Topic :: System :: Hardware",
