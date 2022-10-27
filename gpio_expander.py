@@ -67,6 +67,7 @@ def _get_registry_params(value, x):
     if value > 8:
         _reg_address_multiplier = 2
         _adder = 1
+        # datasheet bit field's name has underscore in place of dot for 16 bit expander
         if x >= 8:
             _name = "1_"
         else:
