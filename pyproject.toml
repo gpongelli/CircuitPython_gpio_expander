@@ -4,7 +4,7 @@
 
 [tool.poetry]
     name = "circuitpython_pca95xx"
-    version = "0.1.0"
+    version = "0.2.0"
     homepage = "https://github.com/gpongelli/CircuitPython_gpio_expander.git"
     description = "CircuitPython helper library for gpio expanders (Texas Instrument PCA95xx and TCA95xx chips)."
     authors = ["Gabriele Pongelli <gabriele.pongelli@gmail.com>"]
@@ -90,7 +90,7 @@
 
 [tool.commitizen]
     name = "cz_conventional_commits"
-    version = "0.1.0"
+    version = "0.2.0"
     version_files = [
         "gpio_expander.py:__version__",
         "pyproject.toml:version"
