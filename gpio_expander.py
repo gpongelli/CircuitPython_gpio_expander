@@ -19,21 +19,19 @@ Implementation Notes
 
 **Hardware:**
 
-* `Texas Instrument PCA9534 <https://www.ti.com/lit/ds/symlink/pca9534.pdf>_`
-* `Texas Instrument PCA9535 <https://www.ti.com/lit/ds/symlink/pca9535.pdf>_`
-* `Texas Instrument PCA9555 <https://www.ti.com/lit/ds/symlink/pca9555.pdf>_`
-* `Texas Instrument TCA9534 <https://www.ti.com/lit/ds/symlink/tca9534.pdf>_`
-* `Texas Instrument TCA9535 <https://www.ti.com/lit/ds/symlink/tca9535.pdf>_`
-* `Texas Instrument TCA9555 <https://www.ti.com/lit/ds/symlink/tca9555.pdf>_`
+* `Texas Instrument PCA9534 <https://www.ti.com/lit/ds/symlink/pca9534.pdf>`_
+* `Texas Instrument PCA9535 <https://www.ti.com/lit/ds/symlink/pca9535.pdf>`_
+* `Texas Instrument PCA9555 <https://www.ti.com/lit/ds/symlink/pca9555.pdf>`_
+* `Texas Instrument TCA9534 <https://www.ti.com/lit/ds/symlink/tca9534.pdf>`_
+* `Texas Instrument TCA9535 <https://www.ti.com/lit/ds/symlink/tca9535.pdf>`_
+* `Texas Instrument TCA9555 <https://www.ti.com/lit/ds/symlink/tca9555.pdf>`_
 
 **Software and Dependencies:**
 
 * Adafruit CircuitPython firmware for the supported boards:
   https://circuitpython.org/downloads
-
-
-# * Adafruit's Bus Device library: https://github.com/adafruit/Adafruit_CircuitPython_BusDevice
-# * Adafruit's Register library: https://github.com/adafruit/Adafruit_CircuitPython_Register
+* Adafruit's Bus Device library: https://github.com/adafruit/Adafruit_CircuitPython_BusDevice
+* Adafruit's Register library: https://github.com/adafruit/Adafruit_CircuitPython_Register
 """
 
 # imports

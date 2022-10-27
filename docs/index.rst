@@ -24,14 +24,17 @@ Table of Contents
 .. toctree::
     :caption: Tutorials
 
-.. todo:: Add any Learn guide links here. If there are none, then simply delete this todo and leave
-    the toctree above for use later.
 
 .. toctree::
     :caption: Related Products
 
-.. todo:: Add any product links here. If there are none, then simply delete this todo and leave
-    the toctree above for use later.
+    Texas Instrument PCA9534 <https://www.ti.com/lit/ds/symlink/pca9534.pdf>
+    Texas Instrument PCA9535 <https://www.ti.com/lit/ds/symlink/pca9535.pdf>
+    Texas Instrument PCA9555 <https://www.ti.com/lit/ds/symlink/pca9555.pdf>
+    Texas Instrument TCA9534 <https://www.ti.com/lit/ds/symlink/tca9534.pdf>
+    Texas Instrument TCA9535 <https://www.ti.com/lit/ds/symlink/tca9535.pdf>
+    Texas Instrument TCA9555 <https://www.ti.com/lit/ds/symlink/tca9555.pdf>
+
 
 .. toctree::
     :caption: Other Links
